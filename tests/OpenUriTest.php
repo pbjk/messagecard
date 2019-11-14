@@ -1,0 +1,68 @@
+<?php
+
+use PHPUnit\Framework\TestCase;
+use Dialogue\Actions\OpenUri;
+
+final class OpenUriTest extends TestCase
+{
+    public function testCanCreateTargetsFromArray()
+    {
+        $this->assertInstanceOf(
+            OpenUri::class,
+            new OpenUri(array(
+                array('os' => 'default', 'uri' => 'https://contoso.com'),
+                array('os' => 'android', 'uri' => 'contoso://contoso.com'),
+            ))
+        );
+    }
+
+    public function testCanCreateTargetsFromString()
+    {
+        $this->assertInstanceOf(
+            OpenUri::class,
+            new OpenUri(array('https://contoso.com'))
+        );
+    }
+
+    public function testCannotCreateTargetsFromInvalidOsType()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new OpenUri(array(
+            array('os' => 'deefault', 'uri' => 'https://contoso.com'),
+        ));
+    }
+
+    public function testCannotCreateTargetsFromArrayUris()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new OpenUri(array(
+            array('os' => 'default', 'uri' => array('https://contoso.com', 'https://example.com')),
+        ));
+    E
+
+    public function testCannotCreateTargetsWhenMissingRequiredArrayKeys()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new OpenUri(array(
+            array('uri' => 'https://contoso.com'),
+        ));
+    }
+
+    public function testConstructionResultsInProperFormat()
+    {
+        $this->assertEquals(
+            (new OpenUri(array(
+                array('os' => 'default', 'uri' => 'https://contoso.com'),
+                array('os' => 'android', 'uri' => 'contoso://contoso.com'),
+            )))->getProperties(),
+            array(
+                '@type' => 'OpenUri',
+                'name' => 'Open Link',
+                'targets' => array(
+                    array('os' => 'default', 'uri' => 'https://contoso.com'),
+                    array('os' => 'android', 'uri' => 'contoso://contoso.com'),
+                )
+            )
+        );
+    }
+}

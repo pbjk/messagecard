@@ -1,0 +1,14 @@
+{
+    "name": "pbjk/dialogue",
+    "require": {
+        "ext-curl": "*",
+        "ext-json": "*",
+        "monolog/monolog": "^1.0"
+    },
+    "autoload": {
+      "psr-4": { "Dialogue\\": "src/Dialogue" }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
+    }
+}
