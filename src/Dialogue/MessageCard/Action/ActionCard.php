@@ -1,12 +1,16 @@
 <?php
-namespace Dialogue\Action;
 
-use InvalidArgumentException;
-use Dialogue\Input\AbstractInput;
-use Dialogue\Action\AbstractAction;
+namespace Dialogue\MessageCard\Action;
+
+use Dialogue\MessageCard\Input\AbstractInput;
+use Dialogue\MessageCard\Action\AbstractAction;
 
 class ActionCard extends AbstractAction
 {
+
+    protected $inputs;
+    protected $actions;
+
     public function __construct($name)
     {
         parent::__construct('ActionCard', $name);
@@ -14,13 +18,13 @@ class ActionCard extends AbstractAction
 
     public function pushInput(AbstractInput $input)
     {
-        $this->properties['inputs'][] = $input->getProperties();
+        $this->inputs[] = $input;
         return $this;
     }
 
     public function pushAction(AbstractAction $action)
     {
-        $this->properties['actions'][] = $action->getProperties();
+        $this->actions[] = $action;
         return $this;
     }
 }

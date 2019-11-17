@@ -1,4 +1,5 @@
 <?php
+
 namespace Dialogue\Processor;
 
 use Monolog\Processor\ProcessorInterface;

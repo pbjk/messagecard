@@ -1,4 +1,5 @@
 <?php
+
 namespace Dialogue\Processor;
 
 use Monolog\Logger;
@@ -31,7 +32,7 @@ class RepoUriProcessor extends AbstractPlaceholderProcessor
         // Remove local prefix from the local file path
         $file = isset($trace['extra']['file']) ? str_replace($this->local, '', $trace['extra']['file']) : '';
         $line = isset($trace['extra']['line']) ? $trace['extra']['line'] : 0;
-        $record['extra'][self::KEY] = "{$this->remote}/{$file}#L{$line}";
+        $record['extra'][self::KEY] = "{$this->remote}/{$file}#L{$line}"; // TODO: This DOES overwrite...
         return $record;
     }
 

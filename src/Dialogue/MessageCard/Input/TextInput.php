@@ -1,9 +1,13 @@
 <?php
 
-namespace Dialogue\Input;
+namespace Dialogue\MessageCard\Input;
 
 class TextInput extends AbstractInput
 {
+
+    protected $isMultiline;
+    protected $maxLength;
+
     public function __construct($title, $id = null)
     {
         parent::__construct('TextInput', $title, $id);
@@ -11,13 +15,13 @@ class TextInput extends AbstractInput
 
     public function multiline($isMultiline = true)
     {
-        $this->properties['isMultiline'] = $isMultiline;
+        $this->isMultiline = $isMultiline;
         return $this;
     }
 
     public function setMaxLength($maxLength)
     {
-        $this->properties['maxLength'] = $maxLength;
+        $this->maxLength = $maxLength;
         return $this;
     }
 }

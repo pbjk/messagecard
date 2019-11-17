@@ -1,34 +1,41 @@
 <?php
-namespace Dialogue\Action;
+
+namespace Dialogue\MessageCard\Action;
 
 use InvalidArgumentException;
 
 class HttpPost extends AbstractAction
 {
+
+    protected $target;
+    protected $body;
+    protected $headers;
+    protected $bodyContentType;
+
     public function __construct($target, $name, $body = '')
     {
         parent::__construct('HttpPOST', $name);
-        $this->properties['target'] = $target;
-        $this->properties['body'] = $body;
+        $this->target = $target;
+        $this->body = $body;
     }
 
     public function setHeaders(array $headers)
     {
-        $this->properties['headers'] = array();
+        $this->headers = array();
         foreach ($headers as $name => $value) {
             if (!is_string($name) || (!is_string($value) && !is_int($value))) {
                 throw new InvalidArgumentException(
                     'Headers must be key-value pairs, where keys are strings and values are strings or integers'
                 );
             }
-            $this->properties['headers'][] = array('name' => $name, 'value' => $value);
+            $this->headers[] = array('name' => $name, 'value' => $value);
         }
         return $this;
     }
 
     public function setContentType($bodyContentType)
     {
-        $this->properties['bodyContentType'] = $bodyContentType;
+        $this->bodyContentType = $bodyContentType;
         return $this;
     }
 }

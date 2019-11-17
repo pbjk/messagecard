@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Dialogue\Actions\OpenUri;
+use Dialogue\MessageCard\Action\OpenUri;
 
 final class OpenUriTest extends TestCase
 {
@@ -20,7 +20,7 @@ final class OpenUriTest extends TestCase
     {
         $this->assertInstanceOf(
             OpenUri::class,
-            new OpenUri(array('https://contoso.com'))
+            new OpenUri('https://contoso.com')
         );
     }
 
@@ -38,7 +38,7 @@ final class OpenUriTest extends TestCase
         new OpenUri(array(
             array('os' => 'default', 'uri' => array('https://contoso.com', 'https://example.com')),
         ));
-    E
+    }
 
     public function testCannotCreateTargetsWhenMissingRequiredArrayKeys()
     {
@@ -50,11 +50,11 @@ final class OpenUriTest extends TestCase
 
     public function testConstructionResultsInProperFormat()
     {
-        $this->assertEquals(
-            (new OpenUri(array(
+        $this->assertEqualsCanonicalizing(
+            json_decode(json_encode((new OpenUri(array(
                 array('os' => 'default', 'uri' => 'https://contoso.com'),
                 array('os' => 'android', 'uri' => 'contoso://contoso.com'),
-            )))->getProperties(),
+            )))), true),
             array(
                 '@type' => 'OpenUri',
                 'name' => 'Open Link',

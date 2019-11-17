@@ -1,9 +1,12 @@
 <?php
 
-namespace Dialogue\Input;
+namespace Dialogue\MessageCard\Input;
 
 class DateInput extends AbstractInput
 {
+
+    protected $includeTime;
+
     public function __construct($title, $id = null)
     {
         parent::__construct('DateInput', $title, $id);
@@ -11,7 +14,7 @@ class DateInput extends AbstractInput
 
     public function includeTime($includeTime = true)
     {
-        $this->properties['includeTime'] = $includeTime;
+        $this->includeTime = $includeTime;
         return $this;
     }
 }
