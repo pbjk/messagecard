@@ -2,8 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 use Monolog\Logger;
-use Dialogue\TeamsHandler;
-use Dialogue\MessageCard\Section;
+use MessageCard\TeamsHandler;
+use MessageCard\Section;
 
 final class TeamsHandlerTest extends TestCase
 {
@@ -72,7 +72,7 @@ final class TeamsHandlerTest extends TestCase
 
     private function generateDefaultSection()
     {
-        $reflected = new ReflectionClass('Dialogue\TeamsHandler');
+        $reflected = new ReflectionClass('MessageCard\TeamsHandler');
         $method = $reflected->getMethod(__FUNCTION__);
         $method->setAccessible(true);
         return $method->invoke($this->handler, $this->record);

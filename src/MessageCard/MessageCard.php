@@ -1,9 +1,8 @@
 <?php
 
-namespace Dialogue\MessageCard;
+namespace MessageCard;
 
-use Dialogue\MessageCard\AbstractMessageCardEntity;
-use Dialogue\MessageCard\Action\AbstractAction;
+use MessageCard\Action\AbstractAction;
 use RuntimeException;
 
 class MessageCard extends AbstractMessageCardEntity

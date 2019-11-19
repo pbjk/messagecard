@@ -1,8 +1,8 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Dialogue\MessageCard\Section;
-use Dialogue\MessageCard\Action\OpenUri;
+use MessageCard\Section;
+use MessageCard\Action\OpenUri;
 
 final class SectionTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dialogue\MessageCard\Input;
+namespace MessageCard\Input;
 
 class TextInput extends AbstractInput
 {

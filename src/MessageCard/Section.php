@@ -1,10 +1,8 @@
 <?php
 
-namespace Dialogue\MessageCard;
+namespace MessageCard;
 
-use Dialogue\MessageCard\AbstractMessageCardEntity;
-use Dialogue\MessageCard\Action\AbstractAction;
-use Dialogue\MessageCard\Fact;
+use MessageCard\Action\AbstractAction;
 
 class Section extends AbstractMessageCardEntity
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dialogue\Processor;
+namespace MessageCard\Processor;
 
 use Monolog\Logger;
 use Monolog\Processor\IntrospectionProcessor;

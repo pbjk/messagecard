@@ -1,8 +1,8 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Dialogue\MessageCard\MessageCard;
-use Dialogue\MessageCard\Section;
+use MessageCard\MessageCard;
+use MessageCard\Section;
 
 final class MessageCardTest extends Testcase
 {

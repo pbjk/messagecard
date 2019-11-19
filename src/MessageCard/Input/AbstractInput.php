@@ -1,8 +1,8 @@
 <?php
 
-namespace Dialogue\MessageCard\Input;
+namespace MessageCard\Input;
 
-use Dialogue\MessageCard\AbstractMessageCardEntity;
+use MessageCard\AbstractMessageCardEntity;
 
 abstract class AbstractInput extends AbstractMessageCardEntity
 {

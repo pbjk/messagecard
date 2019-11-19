@@ -1,9 +1,9 @@
 <?php
 
-namespace Dialogue\MessageCard\Action;
+namespace MessageCard\Action;
 
-use Dialogue\MessageCard\Input\AbstractInput;
-use Dialogue\MessageCard\Action\AbstractAction;
+use MessageCard\Input\AbstractInput;
+use MessageCard\Action\AbstractAction;
 
 class ActionCard extends AbstractAction
 {

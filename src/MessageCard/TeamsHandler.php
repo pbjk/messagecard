@@ -1,10 +1,7 @@
 <?php
 
-namespace Dialogue;
+namespace MessageCard;
 
-use Dialogue\MessageCard\Fact;
-use Dialogue\MessageCard\MessageCard;
-use Dialogue\MessageCard\Section;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use RuntimeException;

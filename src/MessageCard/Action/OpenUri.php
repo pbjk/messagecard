@@ -1,6 +1,6 @@
 <?php
 
-namespace Dialogue\MessageCard\Action;
+namespace MessageCard\Action;
 
 use InvalidArgumentException;
 

@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Dialogue\MessageCard\Action\OpenUri;
+use MessageCard\Action\OpenUri;
 
 final class OpenUriTest extends TestCase
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Dialogue\MessageCard\Action;
+namespace MessageCard\Action;
 
-use Dialogue\MessageCard\AbstractMessageCardEntity;
+use MessageCard\AbstractMessageCardEntity;
 
 abstract class AbstractAction extends AbstractMessageCardEntity
 {
