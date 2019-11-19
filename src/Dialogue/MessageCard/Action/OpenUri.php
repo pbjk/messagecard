@@ -9,11 +9,21 @@ class OpenUri extends AbstractAction
 
     protected static $supportedOsTypes = array('default', 'iOS', 'android', 'windows');
 
-    protected $targets;
+    public $targets;
 
     public function __construct($targets, $name = 'Open Link')
     {
         parent::__construct('OpenUri', $name);
+        $this->setTargets($targets);
+    }
+
+    public static function new($targets, $name = 'Open Link')
+    {
+        return new Self($targets, $name);
+    }
+
+    public function setTargets($targets)
+    {
         if (!is_array($targets)) {
             $targets = array($targets);
         }

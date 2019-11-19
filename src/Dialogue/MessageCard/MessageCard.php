@@ -68,21 +68,19 @@ class MessageCard extends AbstractMessageCardEntity
 
     public function monospace()
     {
-        if (empty($this->sections)) {
-            return $this;
-        }
-
-        foreach($this->sections as $section) {
-            $section->formatMonospace();
+        if (!empty($this->sections)) {
+            foreach($this->sections as $section) {
+                $section->formatMonospace();
+            }
         }
 
         return $this;
     }
 
     // Setters are provided in case you like method chaining :)
-    public static function new($title)
+    public static function new($title, $section = null)
     {
-        return new Self($title);
+        return new Self($title, $section);
     }
 
     public function setTitle($title)

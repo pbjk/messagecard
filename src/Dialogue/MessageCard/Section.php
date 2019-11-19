@@ -39,7 +39,7 @@ class Section extends AbstractMessageCardEntity
         return $this;
     }
 
-    public function setStartGroup($startGroup)
+    public function startGroup($startGroup = true)
     {
         $this->startGroup = $startGroup;
         return $this;
@@ -69,6 +69,12 @@ class Section extends AbstractMessageCardEntity
         return $this;
     }
 
+    public function setActivityImage($image_path)
+    {
+        $this->activityImage = $image_path;
+        return $this;
+    }
+
     protected function addImage($image_path, $title)
     {
         return array(
@@ -77,12 +83,7 @@ class Section extends AbstractMessageCardEntity
         );
     }
 
-    public function setActivityImage($image_path, $title = '')
-    {
-        $this->activityImage = $this->addImage($image_path, $title);
-        return $this;
-    }
-
+    // TODO: This seems to have no effect in Teams messages
     public function setHeroImage($image_path, $title = '')
     {
         $this->heroImage = $this->addImage($image_path, $title);
@@ -95,7 +96,7 @@ class Section extends AbstractMessageCardEntity
         return $this;
     }
 
-    public function pushPotentialAction(AbstractAction $action)
+    public function pushAction(AbstractAction $action)
     {
         $this->potentialAction[] = $action;
         return $this;

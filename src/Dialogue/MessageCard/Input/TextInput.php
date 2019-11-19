@@ -5,12 +5,17 @@ namespace Dialogue\MessageCard\Input;
 class TextInput extends AbstractInput
 {
 
-    protected $isMultiline;
-    protected $maxLength;
+    public $isMultiline;
+    public $maxLength;
 
     public function __construct($title, $id = null)
     {
         parent::__construct('TextInput', $title, $id);
+    }
+
+    public static function new($title, $id = null)
+    {
+        return new Self($title, $id);
     }
 
     public function multiline($isMultiline = true)

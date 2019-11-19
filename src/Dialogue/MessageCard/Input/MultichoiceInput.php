@@ -5,9 +5,9 @@ namespace Dialogue\MessageCard\Input;
 class MultichoiceInput extends AbstractInput
 {
 
-    protected $style;
-    protected $choices;
-    protected $isMultiSelect;
+    public $style;
+    public $choices;
+    public $isMultiSelect;
 
     public function __construct($title = 'Select', array $choices = array(), $id = null)
     {
@@ -15,15 +15,20 @@ class MultichoiceInput extends AbstractInput
         parent::__construct('MultichoiceInput', $title, $id);
     }
 
+    public static function new($title, array $choices = array(), $id = null)
+    {
+        return new Self($title, $choices, $id);
+    }
+
     public function multiSelect($isMultiSelect = true)
     {
-        $this->isMultiSelect = $isMultiSelect;
+        $this->isMultiSelect = ($isMultiSelect !== false);
         return $this;
     }
 
     public function expanded($expanded = true)
     {
-        if ($expanded) {
+        if ($expanded !== false) {
             $this->style = 'expanded';
         } else {
             $this->style = 'normal';

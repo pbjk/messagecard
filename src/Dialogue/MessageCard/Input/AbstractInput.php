@@ -7,10 +7,10 @@ use Dialogue\MessageCard\AbstractMessageCardEntity;
 abstract class AbstractInput extends AbstractMessageCardEntity
 {
     protected $type;
-    protected $title;
-    protected $id;
-    protected $value;
-    protected $isRequired;
+    public $title;
+    public $id;
+    public $value;
+    public $isRequired;
 
     public function __construct($type, $title, $id = null)
     {
@@ -41,7 +41,7 @@ abstract class AbstractInput extends AbstractMessageCardEntity
 
     public function required($isRequired = true)
     {
-        $this->isRequired = $isRequired;
+        $this->isRequired = ($isRequired !== false);
         return $this;
     }
 }

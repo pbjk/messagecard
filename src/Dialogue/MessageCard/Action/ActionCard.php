@@ -8,12 +8,17 @@ use Dialogue\MessageCard\Action\AbstractAction;
 class ActionCard extends AbstractAction
 {
 
-    protected $inputs;
-    protected $actions;
+    public $inputs;
+    public $actions;
 
     public function __construct($name)
     {
         parent::__construct('ActionCard', $name);
+    }
+
+    public static function new($name)
+    {
+        return new Self($name);
     }
 
     public function pushInput(AbstractInput $input)
