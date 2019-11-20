@@ -1,14 +1,19 @@
 {
     "name": "pbjk/messagecard",
+    "description": "PHP library for the Microsoft \"legacy actionable message card\" format",
+    "license": "Apache-2.0",
     "require": {
         "ext-curl": "*",
-        "ext-json": "*",
-        "monolog/monolog": "^1.0"
+        "ext-json": "*"
     },
     "autoload": {
       "psr-4": { "MessageCard\\": "src/MessageCard" }
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.4"
+        "phpunit/phpunit": "^8.4",
+        "monolog/monolog": "^1.0"
+    },
+    "suggest": {
+      "monolog/monolog": "Required if using the Handlers or Processors included in this repository"
     }
 }
