@@ -2,6 +2,7 @@
 
 namespace MessageCard;
 
+use MessageCard\Processor\AbstractPlaceholderProcessor;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use RuntimeException;
@@ -11,6 +12,7 @@ class TeamsHandler extends AbstractProcessingHandler
 
     protected $url;
     protected $card;
+    protected $excludedFields = array();
     protected $monospace = false;
 
     /**
@@ -38,6 +40,43 @@ class TeamsHandler extends AbstractProcessingHandler
     }
 
     /**
+     * Augment parent::pushProcessor with special behavior for
+     * AbstractPlaceholderProcessor, so any unwanted placeholders can be removed
+     * from the output later
+     *
+     * @param callable $callback
+     */
+    public function pushProcessor($callback)
+    {
+        if ($callback instanceof AbstractPlaceholderProcessor) {
+            $this->excludedFields[] = $callback->getKey();
+        }
+        parent::pushProcessor($callback);
+    }
+
+    /**
+     * Get a list of placeholders for processors that have been pushed to this
+     * handler
+     *
+     * @return array
+     */
+    public function getExcludedFields()
+    {
+        return $this->excludedFields;
+    }
+
+    /**
+     * Remove any elements from $record['extra'] whose keys are found in
+     * $this->excludedFields
+     *
+     * @param array $extra
+     */
+    protected function excludeFields($extra)
+    {
+        return array_diff_key($extra, array_flip($this->excludedFields));
+    }
+
+    /**
      * A section has a title, subtitle, image, and list of 'facts' (sort of key
      * value pairs); we only need one section for a log entry
      *
@@ -52,8 +91,9 @@ class TeamsHandler extends AbstractProcessingHandler
         $section->facts = Fact::makeFromArrays(
             array('level' => $record['level_name']),
             $record['context'],
-            $record['extra'],
+            $this->excludeFields($record['extra']),
         );
+
         return $section;
     }
 
