@@ -8,7 +8,8 @@ use Monolog\Processor\IntrospectionProcessor;
 class RepoUriProcessor extends AbstractPlaceholderProcessor
 {
     protected $remote, $local, $level;
-    const KEY = 'repo_uri';
+    protected $overwrite = false;
+    protected $key = 'repo_uri';
 
     public function __construct($remote, $local, $level = Logger::CRITICAL)
     {
@@ -32,12 +33,17 @@ class RepoUriProcessor extends AbstractPlaceholderProcessor
         // Remove local prefix from the local file path
         $file = isset($trace['extra']['file']) ? str_replace($this->local, '', $trace['extra']['file']) : '';
         $line = isset($trace['extra']['line']) ? $trace['extra']['line'] : 0;
-        $record['extra'][self::KEY] = "{$this->remote}/{$file}#L{$line}"; // TODO: This DOES overwrite...
+
+        if (!isset($record['extra'][$this->key]) || $this->overwrite) {
+            $record['extra'][$this->key] = "{$this->remote}/{$file}#L{$line}";
+        }
+
         return $record;
     }
 
-    public function getPlaceholder()
+    public function overwrite($overwrite = true)
     {
-        return '{{' . self::KEY . '}}';
+        $this->overwrite = ($overwrite === true);
+        return $this;
     }
 }
