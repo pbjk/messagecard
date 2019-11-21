@@ -8,16 +8,14 @@ is recommended.
 ## Basic Monolog logging
 
 ```php
+use Monolog\Logger;
+use MessageCard\Handler\TeamsHandler;
 
-    use Monolog\Logger;
-    use MessageCard\Handler\TeamsHandler;
-
-    // Create a Monolog Logger as usual
-    $logger = new Logger('name');
-    $teams = new TeamsHandler('https://outlook.office.com/webhook/...');
-    $logger->pushHandler($teams);
-    $logger->critical('A fatal error has occurred');
-
+// Create a Monolog Logger as usual
+$logger = new Logger('name');
+$teams = new TeamsHandler('https://outlook.office.com/webhook/...');
+$logger->pushHandler($teams);
+$logger->critical('A fatal error has occurred');
 ```
 
 ## Placeholders
@@ -34,43 +32,39 @@ logger will contain a GitHub link to the file that caused the error.
 ### Using a custom callback function
 
 ```php
+use Monolog\Processor\IntrospectionProcessor;
+use MessageCard\Handler\TeamsHandler;
+use MessageCard\Action\OpenUri;
 
-    use Monolog\Processor\IntrospectionProcessor;
-    use MessageCard\Handler\TeamsHandler;
-    use MessageCard\Action\OpenUri;
-
-    $logger = new Logger('channel name');
-    $teams = new TeamsHandler('https://outlook.office.com/webhook/...');
-    $teams->pushProcessor(function ($record) {
-        $record['extra']['repo_uri'] = 'https://github.com/user/repo/blob/master';
-        $record['extra']['relative_file'] = str_replace('/var/www/html/', '', $record['extra']['file']);
-        return $record;
-    });
-    // Use a Monolog IntrospectionProcessor to provide the path to the file that logged this message
-    // Push custom processors to the handler rather than the logger to avoid cluttering the output of other handlers
-    $teams->pushProcessor(new IntrospectionProcessor());
-    // The TeamsHandler will replace anything in double backets with any matching entries from the Monolog record (`$record['extra']`)
-    $teams->pushAction(new OpenUri('{{repo_uri}}/{{relative_file}}'));
-    $logger->pushHandler($teams);
-    $logger->critical('A fatal error has occurred');
-
+$logger = new Logger('channel name');
+$teams = new TeamsHandler('https://outlook.office.com/webhook/...');
+$teams->pushProcessor(function ($record) {
+    $record['extra']['repo_uri'] = 'https://github.com/user/repo/blob/master';
+    $record['extra']['relative_file'] = str_replace('/var/www/html/', '', $record['extra']['file']);
+    return $record;
+});
+// Use a Monolog IntrospectionProcessor to provide the path to the file that logged this message
+// Push custom processors to the handler rather than the logger to avoid cluttering the output of other handlers
+$teams->pushProcessor(new IntrospectionProcessor());
+// The TeamsHandler will replace anything in double backets with any matching entries from the Monolog record (`$record['extra']`)
+$teams->pushAction(new OpenUri('{{repo_uri}}/{{relative_file}}'));
+$logger->pushHandler($teams);
+$logger->critical('A fatal error has occurred');
 ```
 
 ### Using placeholder processors
 
 ```php
+use MessageCard\Handler\TeamsHandler;
+use MessageCard\Processor\RepoUriProcessor;
 
-    use MessageCard\Handler\TeamsHandler;
-    use MessageCard\Processor\RepoUriProcessor;
-
-    $logger = new Logger('channel name');
-    $uri_processor = new RepoUriProcessor('https://github.com/user/repo/blob/master', '/var/www/html');
-    $teams = new TeamsHandler('https://outlook.office.com/webhook/...');
-    $teams->pushProcessor($uri_processor);
-    $teams->pushAction(new OpenUri($uri_processor->getPlaceholder()));
-    $logger->pushHandler($teams);
-    $logger->critical('A fatal error has occurred');
-
+$logger = new Logger('channel name');
+$uri_processor = new RepoUriProcessor('https://github.com/user/repo/blob/master', '/var/www/html');
+$teams = new TeamsHandler('https://outlook.office.com/webhook/...');
+$teams->pushProcessor($uri_processor);
+$teams->pushAction(new OpenUri($uri_processor->getPlaceholder()));
+$logger->pushHandler($teams);
+$logger->critical('A fatal error has occurred');
 ```
 
 Note: The MessageCard format itself supports the
@@ -84,12 +78,10 @@ replaced accidentally but please let me know if this is a problem :)
 It is possible to build a card from scratch and send it manually:
 
 ```php
+use MessageCard\MessageCard;
 
-    use MessageCard\MessageCard;
-
-    $card = new MessageCard('title', 'summary');
-    $card->send();
-
+$card = new MessageCard('title', 'summary');
+$card->send();
 ```
 
 Almost all properties on these classes are public, and there are setter methods
@@ -99,35 +91,31 @@ validation -- for example, the OpenUri Action needs to look something like the
 json below, so we are validating the os type.
 
 ```json
-
-    "targets": [
-        { "os": "default", "uri": "https://contoso.com/example" },
-        { "os": "iOS", "uri": "contoso://example" },
-        { "os": "android", "uri": "contoso://example" },
-        { "os": "windows", "uri": "contoso://example" }
-    ]
-
+"targets": [
+    { "os": "default", "uri": "https://contoso.com/example" },
+    { "os": "iOS", "uri": "contoso://example" },
+    { "os": "android", "uri": "contoso://example" },
+    { "os": "windows", "uri": "contoso://example" }
+]
 ```
 
 Below is an example of a little bit more complicated card:
 
 ```php
+use MessageCard\MessageCard;
+use MessageCard\Section;
 
-    use MessageCard\MessageCard;
-    use MessageCard\Section;
-
-    $card = MessageCard::new('title', 'summary')
-      ->setThemeColor('#8892bf')
-      ->setText('This is the main body of the message card, but it can also contain Sections!')
-      ->pushSection(
+$card = MessageCard::new('title', 'summary')
+    ->setThemeColor('#8892bf')
+    ->setText('This is the main body of the message card, but it can also contain Sections!')
+    ->pushSection(
         Section::new()
           ->setStartGroup()
           ->setActivityTitle('This Section will be somewhat separated visually')
           ->pushImage('https://path/to/image', '`title` html attribute')
           ->pushAction(new OpenUri('https://path/to/article', 'View Article'))
-      );
-    $card->send();
-
+);
+$card->send();
 ```
 
 ## Monospace
