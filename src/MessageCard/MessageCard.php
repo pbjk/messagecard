@@ -21,9 +21,7 @@ class MessageCard extends AbstractMessageCardEntity
     public function __construct($title, $summary = null)
     {
         $this->title = $title;
-        if (is_null($summary)) {
-            $this->summary = $title;
-        }
+        $this->summary = is_null($summary) ? $title : $summary;
     }
 
     public function send($url, $placeholders = array())
