@@ -105,11 +105,11 @@ Below is an example of a little bit more complicated card:
 use MessageCard\MessageCard;
 use MessageCard\Section;
 
-$card = MessageCard::new('title', 'summary')
+$card = MessageCard::create('title', 'summary')
     ->setThemeColor('#8892bf')
     ->setText('This is the main body of the message card, but it can also contain Sections!')
     ->pushSection(
-        Section::new()
+        Section::create()
           ->setStartGroup()
           ->setActivityTitle('This Section will be somewhat separated visually')
           ->pushImage('https://path/to/image', '`title` html attribute')

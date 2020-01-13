@@ -75,7 +75,7 @@ class MessageCard extends AbstractMessageCardEntity
     }
 
     // Setters are provided in case you like method chaining :)
-    public static function new($title, $section = null)
+    public static function create($title, $section = null)
     {
         return new Self($title, $section);
     }

@@ -16,7 +16,7 @@ class ActionCard extends AbstractAction
         parent::__construct('ActionCard', $name);
     }
 
-    public static function new($name)
+    public static function create($name)
     {
         return new Self($name);
     }

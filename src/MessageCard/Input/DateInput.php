@@ -12,7 +12,7 @@ class DateInput extends AbstractInput
         parent::__construct('DateInput', $title, $id);
     }
 
-    public static function new($title, $id = null)
+    public static function create($title, $id = null)
     {
         return new Self($title, $id);
     }

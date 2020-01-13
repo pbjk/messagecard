@@ -20,7 +20,7 @@ class Section extends AbstractMessageCardEntity
     public $potentialAction;
 
     // Setters are provided in case you like method chaining :)
-    public static function new()
+    public static function create()
     {
         return new Self();
     }

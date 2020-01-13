@@ -19,7 +19,7 @@ class HttpPost extends AbstractAction
         $this->body = $body;
     }
 
-    public static function new($target, $name, $body = '')
+    public static function create($target, $name, $body = '')
     {
         return new Self($target, $name, $body);
     }

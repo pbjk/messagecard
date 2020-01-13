@@ -11,7 +11,7 @@ final class MessageCardTest extends Testcase
 
     protected function setUp(): void
     {
-        $this->card = MessageCard::new('card title')
+        $this->card = MessageCard::create('card title')
             ->setSummary('card summary')
             ->setCorrelationId('3081-1289483-1291832')
             ->setThemeColor('#300330')
@@ -49,7 +49,7 @@ final class MessageCardTest extends Testcase
 
     public function testMonospaceGeneratesBacktickEscapes()
     {
-        $this->card->pushSection(Section::new()->setTitle('Monospace title'));
+        $this->card->pushSection(Section::create()->setTitle('Monospace title'));
         $this->card->monospace();
         $this->assertEqualsCanonicalizing(
             json_decode($this->card->toJson(), true),

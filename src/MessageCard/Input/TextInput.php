@@ -13,7 +13,7 @@ class TextInput extends AbstractInput
         parent::__construct('TextInput', $title, $id);
     }
 
-    public static function new($title, $id = null)
+    public static function create($title, $id = null)
     {
         return new Self($title, $id);
     }

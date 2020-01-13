@@ -15,7 +15,7 @@ class MultichoiceInput extends AbstractInput
         parent::__construct('MultichoiceInput', $title, $id);
     }
 
-    public static function new($title, array $choices = array(), $id = null)
+    public static function create($title, array $choices = array(), $id = null)
     {
         return new Self($title, $choices, $id);
     }

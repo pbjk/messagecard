@@ -8,7 +8,7 @@ final class SectionTest extends TestCase
 {
     public function testSetAllPropertiesOfSection()
     {
-        $section = Section::new()
+        $section = Section::create()
             ->setTitle('section title')
             ->setText('section text')
             ->startGroup()
