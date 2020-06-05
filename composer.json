@@ -3,6 +3,7 @@
     "description": "PHP library for the Microsoft \"legacy actionable message card\" format",
     "license": "Apache-2.0",
     "require": {
+        "php": ">= 5.3.0",
         "ext-curl": "*",
         "ext-json": "*"
     },

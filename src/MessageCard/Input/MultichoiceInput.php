@@ -17,7 +17,7 @@ class MultichoiceInput extends AbstractInput
 
     public static function create($title, array $choices = array(), $id = null)
     {
-        return new Self($title, $choices, $id);
+        return new self($title, $choices, $id);
     }
 
     public function multiSelect($isMultiSelect = true)

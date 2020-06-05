@@ -22,7 +22,7 @@ class Section extends AbstractMessageCardEntity
     // Setters are provided in case you like method chaining :)
     public static function create()
     {
-        return new Self();
+        return new self();
     }
 
     public function setTitle($title)

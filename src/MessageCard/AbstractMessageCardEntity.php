@@ -31,7 +31,7 @@ abstract class AbstractMessageCardEntity implements JsonSerializable
                 return '`' . $value . '`';
             } elseif (is_array($value)) {
                 return $this->formatMonospaceArray($value);
-            } elseif ($value instanceof Self) {
+            } elseif ($value instanceof self) {
                 return $value->formatMonospace();
             } else {
                 return $value;
@@ -46,7 +46,7 @@ abstract class AbstractMessageCardEntity implements JsonSerializable
                 $this->$property = '`' . $value . '`';
             } elseif (is_array($value)) {
                 $this->$property = $this->formatMonospaceArray($value);
-            } elseif ($value instanceof Self) {
+            } elseif ($value instanceof self) {
                 $this->$property = $value->formatMonospace();
             } else {
                 $this->$property = $value;

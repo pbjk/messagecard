@@ -22,7 +22,7 @@ class TeamsHandler extends AbstractProcessingHandler
      * @param int $level
      * @param string $title
      * @param bool $bubble
-     * @return Self
+     * @return self
      */
     public function __construct($url, $level = Logger::CRITICAL, $title = null, $bubble = true)
     {
@@ -97,9 +97,6 @@ class TeamsHandler extends AbstractProcessingHandler
         return $section;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function write(array $record)
     {
         // If user didn't specify anything, then generate a default card

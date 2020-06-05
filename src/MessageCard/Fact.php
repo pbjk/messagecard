@@ -3,6 +3,7 @@
 namespace MessageCard;
 
 use InvalidArgumentException;
+use Traversable;
 
 class Fact
 {
@@ -13,10 +14,9 @@ class Fact
      *
      * In the JSON, values must always be strings.
      *
-     * @param array $context
      * @return array
      */
-    public static function makeFromArrays(array $fact1)
+    public static function makeFromArrays()
     {
         $formatted_facts = array();
         foreach (func_get_args() as $arg) {

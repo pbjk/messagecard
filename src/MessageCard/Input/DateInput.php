@@ -14,7 +14,7 @@ class DateInput extends AbstractInput
 
     public static function create($title, $id = null)
     {
-        return new Self($title, $id);
+        return new self($title, $id);
     }
 
     public function includeTime($includeTime = true)

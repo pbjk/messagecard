@@ -21,7 +21,7 @@ class HttpPost extends AbstractAction
 
     public static function create($target, $name, $body = '')
     {
-        return new Self($target, $name, $body);
+        return new self($target, $name, $body);
     }
 
     public function setTarget($target)

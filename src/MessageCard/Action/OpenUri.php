@@ -19,7 +19,7 @@ class OpenUri extends AbstractAction
 
     public static function create($targets, $name = 'Open Link')
     {
-        return new Self($targets, $name);
+        return new self($targets, $name);
     }
 
     public function setTargets($targets)

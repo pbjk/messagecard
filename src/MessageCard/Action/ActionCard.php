@@ -18,7 +18,7 @@ class ActionCard extends AbstractAction
 
     public static function create($name)
     {
-        return new Self($name);
+        return new self($name);
     }
 
     public function pushInput(AbstractInput $input)
