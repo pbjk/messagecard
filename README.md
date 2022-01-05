@@ -23,7 +23,7 @@ $logger->critical('A fatal error has occurred');
 This package supports "moustache-style" placeholders that can be filled in just
 before the message is sent.
 
-Which doesn't add much when constructing and sending messages manually, but can
+This doesn't add much when constructing and sending messages manually, but can
 be helpful when the message is processed in some way before being sent. My use
 case for placeholders was in the Monolog integration (the TeamsHandler class).
 For example, in the two code snippets below, the message emitted by the Monolog
