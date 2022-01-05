@@ -4,8 +4,8 @@ namespace MessageCard;
 
 use MessageCard\Processor\AbstractPlaceholderProcessor;
 use Monolog\Handler\AbstractProcessingHandler;
+use Monolog\Handler\HandlerInterface;
 use Monolog\Logger;
-use RuntimeException;
 
 class TeamsHandler extends AbstractProcessingHandler
 {
@@ -46,12 +46,13 @@ class TeamsHandler extends AbstractProcessingHandler
      *
      * @param callable $callback
      */
-    public function pushProcessor($callback)
+    public function pushProcessor(callable $callback): HandlerInterface
     {
         if ($callback instanceof AbstractPlaceholderProcessor) {
             $this->excludedFields[] = $callback->getKey();
         }
         parent::pushProcessor($callback);
+        return $this;
     }
 
     /**
@@ -97,7 +98,7 @@ class TeamsHandler extends AbstractProcessingHandler
         return $section;
     }
 
-    protected function write(array $record)
+    protected function write(array $record): void
     {
         // If user didn't specify anything, then generate a default card
         if (empty($this->card->sections)) {
