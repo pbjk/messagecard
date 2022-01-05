@@ -4,10 +4,21 @@ namespace MessageCard\Input;
 
 class TextInput extends AbstractInput
 {
+    /**
+     * Whether multiple lines of text should be accepted
+     *
+     * @var
+     */
     public $isMultiline;
+
+    /**
+     * Maximum number of characters that can be entered
+     *
+     * @var
+     */
     public $maxLength;
 
-    public function __construct($title, $id = null)
+    public function __construct(string $title, ?string $id = null)
     {
         parent::__construct('TextInput', $title, $id);
     }
@@ -17,7 +28,7 @@ class TextInput extends AbstractInput
         return new self($title, $id);
     }
 
-    public function multiline($isMultiline = true)
+    public function setMultiline(bool $isMultiline = true)
     {
         $this->isMultiline = $isMultiline;
         return $this;

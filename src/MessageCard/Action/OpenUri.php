@@ -6,17 +6,27 @@ use InvalidArgumentException;
 
 class OpenUri extends AbstractAction
 {
+    /**
+     * Specifying the OS type allows for opening the target in an app.
+     *
+     * @var array
+     */
     protected static $supportedOsTypes = array('default', 'iOS', 'android', 'windows');
 
+    /**
+     * Target URIs
+     *
+     * @var array
+     */
     public $targets;
 
-    public function __construct($targets, $name = 'Open Link')
+    public function __construct($targets, string $name = 'Open Link')
     {
         parent::__construct('OpenUri', $name);
         $this->setTargets($targets);
     }
 
-    public static function create($targets, $name = 'Open Link')
+    public static function create($targets, string $name = 'Open Link')
     {
         return new self($targets, $name);
     }
@@ -27,9 +37,10 @@ class OpenUri extends AbstractAction
             $targets = array($targets);
         }
         $this->targets = $this->formatTargets($targets);
+        return $this;
     }
 
-    protected function formatTargets(array $targets)
+    protected function formatTargets(array $targets): array
     {
         $formatted = array();
         foreach ($targets as $target) {

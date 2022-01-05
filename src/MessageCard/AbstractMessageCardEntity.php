@@ -23,6 +23,12 @@ abstract class AbstractMessageCardEntity implements JsonSerializable
         return $into_json;
     }
 
+    /**
+     * Recursively format nested messagecard arrays
+     *
+     * @param array $array
+     * @return mixed
+     */
     public function formatMonospaceArray(array $array)
     {
         return array_map(function ($value) {
@@ -38,10 +44,17 @@ abstract class AbstractMessageCardEntity implements JsonSerializable
         }, $array);
     }
 
+    /**
+     * Recursively surround all string properties with backticks, to avoid
+     * markdown formatting of the entity.
+     *
+     * @return self
+     */
     public function formatMonospace()
     {
         foreach ($this as $property => $value) {
             if (is_string($value)) {
+                // TODO escape existing `
                 $this->$property = '`' . $value . '`';
             } elseif (is_array($value)) {
                 $this->$property = $this->formatMonospaceArray($value);
@@ -51,5 +64,6 @@ abstract class AbstractMessageCardEntity implements JsonSerializable
                 $this->$property = $value;
             }
         }
+        return $this;
     }
 }

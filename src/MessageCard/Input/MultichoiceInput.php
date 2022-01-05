@@ -4,11 +4,30 @@ namespace MessageCard\Input;
 
 class MultichoiceInput extends AbstractInput
 {
+    /**
+     * Either "normal" or "expanded". Defaults to "normal"; "expanded" attempts
+     * to display all options on a single screen, usually using radio buttons.
+     *
+     * @var string
+     */
     public $style;
+
+    /**
+     * Display (name)/value pairs for each choice. Array format:
+     * ["Name of Choice" => "value_of_choice"]
+     *
+     * @var array
+     */
     public $choices;
+
+    /**
+     * Whether multiple options can be selected at once
+     *
+     * @var bool
+     */
     public $isMultiSelect;
 
-    public function __construct($title = 'Select', array $choices = array(), $id = null)
+    public function __construct(string $title = 'Select', array $choices = array(), ?string $id = null)
     {
         $this->buildChoices($choices);
         parent::__construct('MultichoiceInput', $title, $id);
@@ -19,13 +38,13 @@ class MultichoiceInput extends AbstractInput
         return new self($title, $choices, $id);
     }
 
-    public function multiSelect($isMultiSelect = true)
+    public function setMultiSelect(bool $isMultiSelect = true)
     {
-        $this->isMultiSelect = ($isMultiSelect !== false);
+        $this->isMultiSelect = $isMultiSelect;
         return $this;
     }
 
-    public function expanded($expanded = true)
+    public function setExpanded(bool $expanded = true)
     {
         if ($expanded !== false) {
             $this->style = 'expanded';
@@ -35,7 +54,7 @@ class MultichoiceInput extends AbstractInput
         return $this;
     }
 
-    protected function buildChoices(array $choices)
+    protected function buildChoices(array $choices): void
     {
         foreach ($choices as $display => $value) {
             // If it's not an associative array, use the value for both properties

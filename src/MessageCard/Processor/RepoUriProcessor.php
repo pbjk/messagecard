@@ -15,8 +15,8 @@ class RepoUriProcessor extends AbstractPlaceholderProcessor
 
     public function __construct($remote, $local, $level = Logger::CRITICAL)
     {
-        $this->remote = rtrim($remote, '/');
-        $this->local = rtrim($local, '/') . '/';
+        $this->remote = rtrim($remote, DIRECTORY_SEPARATOR);
+        $this->local = rtrim($local, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $this->level = Logger::toMonologLevel($level);
     }
 
@@ -43,9 +43,20 @@ class RepoUriProcessor extends AbstractPlaceholderProcessor
         return $record;
     }
 
-    public function overwrite($overwrite = true)
+    public function getKey(): string
     {
-        $this->overwrite = ($overwrite === true);
+        return $this->key;
+    }
+
+    public function setKey(string $key)
+    {
+        $this->key = $key;
+        return $this;
+    }
+
+    public function setOverwrite(bool $overwrite = true)
+    {
+        $this->overwrite = $overwrite;
         return $this;
     }
 }

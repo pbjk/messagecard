@@ -4,21 +4,24 @@ namespace MessageCard\Input;
 
 class DateInput extends AbstractInput
 {
+    /**
+     * @var bool
+     */
     public $includeTime;
 
-    public function __construct($title, $id = null)
+    public function __construct(string $title, ?string $id = null)
     {
         parent::__construct('DateInput', $title, $id);
     }
 
-    public static function create($title, $id = null)
+    public static function create(string $title, ?string $id = null)
     {
         return new self($title, $id);
     }
 
-    public function includeTime($includeTime = true)
+    public function includeTime(bool $includeTime = true)
     {
-        $this->includeTime = ($includeTime !== false);
+        $this->includeTime = $includeTime;
         return $this;
     }
 }

@@ -51,8 +51,7 @@ class MessageCardTest extends Testcase
 
     public function testMonospaceGeneratesBacktickEscapes()
     {
-        $this->card->pushSection(Section::create()->setTitle('Monospace title'));
-        $this->card->monospace();
+        $this->card->pushSection(Section::create()->setTitle('Monospace title')->formatMonospace());
         $this->assertEqualsCanonicalizing(
             json_decode($this->card->toJson(), true),
             array(

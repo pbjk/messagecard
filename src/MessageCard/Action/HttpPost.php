@@ -6,30 +6,53 @@ use InvalidArgumentException;
 
 class HttpPost extends AbstractAction
 {
+    /**
+     * URL of the service that implements the action
+     *
+     * @var string
+     */
     public $target;
+
+    /**
+     * Body of the POST request
+     *
+     * @var string
+     */
     public $body;
+
+    /**
+     * Headers that will be sent with the POST request
+     *
+     * @var array
+     */
     public $headers;
+
+    /**
+     * MIME type of POST body - defaults to application/json
+     *
+     * @param string
+     */
     public $bodyContentType;
 
-    public function __construct($target, $name, $body = '')
+    public function __construct(string $target, string $name, string $body = '')
     {
         parent::__construct('HttpPOST', $name);
         $this->target = $target;
         $this->body = $body;
     }
 
-    public static function create($target, $name, $body = '')
+    public static function create(string $target, string $name, string $body = '')
     {
         return new self($target, $name, $body);
     }
 
-    public function setTarget($target)
+    public function setTarget(string $target)
     {
         $this->target = $target;
         return $this;
     }
 
-    public function setBody($body)
+    public function setBody(string $body)
     {
         $this->body = $body;
         return $this;
@@ -49,7 +72,7 @@ class HttpPost extends AbstractAction
         return $this;
     }
 
-    public function setContentType($bodyContentType)
+    public function setContentType(string $bodyContentType)
     {
         $this->bodyContentType = $bodyContentType;
         return $this;

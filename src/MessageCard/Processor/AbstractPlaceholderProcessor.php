@@ -6,23 +6,12 @@ use Monolog\Processor\ProcessorInterface;
 
 abstract class AbstractPlaceholderProcessor implements ProcessorInterface
 {
-    protected $key = 'placeholder';
-
+    // ProcessorInterface method
     abstract public function __invoke(array $record);
 
-    public function getPlaceholder()
+    abstract public function getKey(): string;
+    public function getPlaceholder(): string
     {
-        return '{{' . $this->key . '}}';
-    }
-
-    public function getKey()
-    {
-        return $this->key;
-    }
-
-    public function setKey($key)
-    {
-        $this->key = $key;
-        return $this;
+        return '{{' . $this->getKey() . '}}';
     }
 }

@@ -9,10 +9,26 @@ use Monolog\Logger;
 
 class TeamsHandler extends AbstractProcessingHandler
 {
+    /**
+     * Webhook URL
+     *
+     * @var string
+     */
     protected $url;
+
+    /**
+     * Message card template that will be used when writing log entries
+     *
+     * @var MessageCard
+     */
     protected $card;
+
+    /**
+     * Placeholder fields that will be removed from the default section's facts
+     *
+     * @var array
+     */
     protected $excludedFields = array();
-    protected $monospace = false;
 
     /**
      * Create a TeamsHandler
@@ -23,7 +39,7 @@ class TeamsHandler extends AbstractProcessingHandler
      * @param bool $bubble
      * @return self
      */
-    public function __construct($url, $level = Logger::CRITICAL, $title = null, $bubble = true)
+    public function __construct(string $url, $level = Logger::CRITICAL, ?string $title = null, bool $bubble = true)
     {
         $this->url = $url;
 
@@ -54,6 +70,11 @@ class TeamsHandler extends AbstractProcessingHandler
         return $this;
     }
 
+    public function popProcessor(): callable
+    {
+        return parent::popProcessor();
+    }
+
     /**
      * Get a list of placeholders for processors that have been pushed to this
      * handler
@@ -71,7 +92,7 @@ class TeamsHandler extends AbstractProcessingHandler
      *
      * @param array $extra
      */
-    protected function excludeFields($extra)
+    protected function excludeFields(array $extra)
     {
         return array_diff_key($extra, array_flip($this->excludedFields));
     }

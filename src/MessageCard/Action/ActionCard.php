@@ -7,15 +7,27 @@ use MessageCard\Action\AbstractAction;
 
 class ActionCard extends AbstractAction
 {
+    /**
+     * Form fields in the ActionCard.
+     *
+     * @var AbstractInput[] $inputs
+     */
     public $inputs;
+
+    /**
+     * Actions that can be performed from the ActionCard. Cannot contain another
+     * ActionCard.
+     *
+     * @var AbstractAction[] $actions
+     */
     public $actions;
 
-    public function __construct($name)
+    public function __construct(string $name)
     {
         parent::__construct('ActionCard', $name);
     }
 
-    public static function create($name)
+    public static function create(string $name)
     {
         return new self($name);
     }

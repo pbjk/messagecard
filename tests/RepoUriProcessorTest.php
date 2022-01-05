@@ -42,7 +42,7 @@ class RepoUriProcessorTest extends TestCase
 
     public function testCanOverwriteRecordContents()
     {
-        $this->repo->overwrite();
+        $this->repo->setOverwrite();
 
         $this->logger->pushProcessor(function ($record) {
             $record['extra'][$this->repo->getKey()] = 'already_set';
