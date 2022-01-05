@@ -129,10 +129,10 @@ class Section extends AbstractMessageCardEntity
 
     protected function addImage(string $image_path, string $title)
     {
-        return array(
+        return [
             'image' => $image_path,
             'title' => $title,
-        );
+        ];
     }
 
     // TODO: This seems to have no effect in Teams messages

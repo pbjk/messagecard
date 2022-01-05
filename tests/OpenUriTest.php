@@ -12,10 +12,10 @@ class OpenUriTest extends TestCase
     {
         $this->assertInstanceOf(
             OpenUri::class,
-            new OpenUri(array(
-                array('os' => 'default', 'uri' => 'https://contoso.com'),
-                array('os' => 'android', 'uri' => 'contoso://contoso.com'),
-            ))
+            new OpenUri([
+                ['os' => 'default', 'uri' => 'https://contoso.com'],
+                ['os' => 'android', 'uri' => 'contoso://contoso.com'],
+            ])
         );
     }
 
@@ -30,42 +30,42 @@ class OpenUriTest extends TestCase
     public function testCannotCreateTargetsFromInvalidOsType()
     {
         $this->expectException(InvalidArgumentException::class);
-        new OpenUri(array(
-            array('os' => 'deefault', 'uri' => 'https://contoso.com'),
-        ));
+        new OpenUri([
+            ['os' => 'deefault', 'uri' => 'https://contoso.com'],
+        ]);
     }
 
     public function testCannotCreateTargetsFromArrayUris()
     {
         $this->expectException(InvalidArgumentException::class);
-        new OpenUri(array(
-            array('os' => 'default', 'uri' => array('https://contoso.com', 'https://example.com')),
-        ));
+        new OpenUri([
+            ['os' => 'default', 'uri' => ['https://contoso.com', 'https://example.com']],
+        ]);
     }
 
     public function testCannotCreateTargetsWhenMissingRequiredArrayKeys()
     {
         $this->expectException(InvalidArgumentException::class);
-        new OpenUri(array(
-            array('uri' => 'https://contoso.com'),
-        ));
+        new OpenUri([
+            ['uri' => 'https://contoso.com'],
+        ]);
     }
 
     public function testConstructionResultsInProperFormat()
     {
         $this->assertEqualsCanonicalizing(
-            json_decode(json_encode((new OpenUri(array(
-                array('os' => 'default', 'uri' => 'https://contoso.com'),
-                array('os' => 'android', 'uri' => 'contoso://contoso.com'),
-            )))), true),
-            array(
+            json_decode(json_encode(new OpenUri([
+                ['os' => 'default', 'uri' => 'https://contoso.com'],
+                ['os' => 'android', 'uri' => 'contoso://contoso.com'],
+            ])), true),
+            [
                 '@type' => 'OpenUri',
                 'name' => 'Open Link',
-                'targets' => array(
-                    array('os' => 'default', 'uri' => 'https://contoso.com'),
-                    array('os' => 'android', 'uri' => 'contoso://contoso.com'),
-                )
-            )
+                'targets' => [
+                    ['os' => 'default', 'uri' => 'https://contoso.com'],
+                    ['os' => 'android', 'uri' => 'contoso://contoso.com'],
+                ]
+            ]
         );
     }
 }

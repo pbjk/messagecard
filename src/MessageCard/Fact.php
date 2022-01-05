@@ -18,16 +18,16 @@ class Fact
      */
     public static function makeFromArrays()
     {
-        $formatted_facts = array();
+        $formatted_facts = [];
         foreach (func_get_args() as $arg) {
             if (!is_array($arg) && !($arg instanceof Traversable)) {
                 throw new InvalidArgumentException('Non-Traversable argument provided');
             }
             foreach ($arg as $name => $value) {
-                $formatted_facts[] = array(
+                $formatted_facts[] = [
                     'name' => empty($name) ? "None" : (string) $name,
                     'value' => empty($value) ? "None" : (string) $value,
-                );
+                ];
             }
         }
         return $formatted_facts;

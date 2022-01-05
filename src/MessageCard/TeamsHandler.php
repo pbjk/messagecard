@@ -28,7 +28,7 @@ class TeamsHandler extends AbstractProcessingHandler
      *
      * @var array
      */
-    protected $excludedFields = array();
+    protected $excludedFields = [];
 
     /**
      * Create a TeamsHandler
@@ -110,7 +110,7 @@ class TeamsHandler extends AbstractProcessingHandler
         $section->activityTitle = $record['message'];
         $section->activitySubtitle = $record['datetime']->format('Y-m-d H:i:s');
         $section->facts = Fact::makeFromArrays(
-            array('level' => $record['level_name']),
+            ['level' => $record['level_name']],
             $record['context'],
             $this->excludeFields($record['extra']),
         );

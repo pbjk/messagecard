@@ -18,7 +18,7 @@ class MessageCardTest extends Testcase
             ->setCorrelationId('3081-1289483-1291832')
             ->setThemeColor('#300330')
             ->setText('card text');
-        $this->defaultCard = array(
+        $this->defaultCard = [
             '@type' => 'MessageCard',
             '@context' => 'https://schema.org/extensions',
             'title' => 'card title',
@@ -26,7 +26,7 @@ class MessageCardTest extends Testcase
             'correlationId' => '3081-1289483-1291832',
             'themeColor' => '#300330',
             'text' => 'card text',
-        );
+        ];
     }
 
     public function testSetBasicPropertiesOfMessageCard()
@@ -42,10 +42,8 @@ class MessageCardTest extends Testcase
     {
         $this->card->setTitle('{{custom_title}}');
         $this->assertEqualsCanonicalizing(
-            json_decode($this->card->toJson(array('custom_title' => 'Custom Title Placeholder')), true),
-            array_merge($this->defaultCard, array(
-                'title' => 'Custom Title Placeholder',
-            ))
+            json_decode($this->card->toJson(['custom_title' => 'Custom Title Placeholder']), true),
+            array_merge($this->defaultCard, ['title' => 'Custom Title Placeholder'])
         );
     }
 
@@ -54,7 +52,7 @@ class MessageCardTest extends Testcase
         $this->card->pushSection(Section::create()->setTitle('Monospace title')->formatMonospace());
         $this->assertEqualsCanonicalizing(
             json_decode($this->card->toJson(), true),
-            array(
+            [
                 '@type' => 'MessageCard',
                 '@context' => 'https://schema.org/extensions',
                 'title' => 'card title',
@@ -62,12 +60,10 @@ class MessageCardTest extends Testcase
                 'correlationId' => '3081-1289483-1291832',
                 'themeColor' => '#300330',
                 'text' => 'card text',
-                'sections' => array(
-                    array(
-                        'title' => '`Monospace title`',
-                    ),
-                ),
-            )
+                'sections' => [
+                    ['title' => '`Monospace title`'],
+                ],
+            ]
         );
     }
 }

@@ -27,13 +27,13 @@ class MultichoiceInput extends AbstractInput
      */
     public $isMultiSelect;
 
-    public function __construct(string $title = 'Select', array $choices = array(), ?string $id = null)
+    public function __construct(string $title = 'Select', array $choices = [], ?string $id = null)
     {
         $this->buildChoices($choices);
         parent::__construct('MultichoiceInput', $title, $id);
     }
 
-    public static function create($title, array $choices = array(), $id = null)
+    public static function create($title, array $choices = [], $id = null)
     {
         return new self($title, $choices, $id);
     }
@@ -59,9 +59,9 @@ class MultichoiceInput extends AbstractInput
         foreach ($choices as $display => $value) {
             // If it's not an associative array, use the value for both properties
             if (is_int($display)) {
-                $this->choices[] = array('display' => $value, 'value' => $value);
+                $this->choices[] = ['display' => $value, 'value' => $value];
             } else {
-                $this->choices[] = array('display' => $display, 'value' => $value);
+                $this->choices[] = ['display' => $display, 'value' => $value];
             }
         }
     }

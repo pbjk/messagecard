@@ -18,59 +18,59 @@ class TeamsHandlerTest extends TestCase
     protected function setUp(): void
     {
         $this->handler = new TeamsHandler('uri', Logger::DEBUG, 'title');
-        $this->record = array(
+        $this->record = [
             'message' => 'An error has occurred',
             'context' =>
-            array(
+            [
                 'info' => 'items in the context array may be turned into "facts"',
-            ),
+            ],
             'level' => 100,
             'level_name' => 'DEBUG',
             'channel' => 'channel_name',
             'datetime' =>
-            DateTime::__set_state(array(
+            DateTime::__set_state([
                 'date' => '2019-11-16 21:59:15.276562',
                 'timezone_type' => 3,
                 'timezone' => 'America/New_York',
-            )),
+            ]),
             'extra' =>
-            array(
+            [
                 'custom_uri' => 'https://example.org',
                 'custom_title' => 'Custom Title Placeholder',
-            ),
-        );
-        $this->defaultCard = array(
+            ],
+        ];
+        $this->defaultCard = [
             '@type' => 'MessageCard',
             '@context' => 'https://schema.org/extensions',
             'title' => 'title',
             'summary' => 'title',
             'sections' =>
-            array(
-                array(
+            [
+                [
                     'activityTitle' => 'An error has occurred',
                     'activitySubtitle' => '2019-11-16 21:59:15',
                     'facts' =>
-                    array(
-                        array(
+                    [
+                        [
                             'name' => 'level',
                             'value' => 'DEBUG',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'info',
                             'value' => 'items in the context array may be turned into "facts"',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'custom_uri',
                             'value' => 'https://example.org',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'custom_title',
                             'value' => 'Custom Title Placeholder',
-                        ),
-                    ),
-                ),
-            ),
-        );
+                        ],
+                    ],
+                ],
+            ],
+        ];
     }
 
     private function generateDefaultSection()
@@ -97,17 +97,17 @@ class TeamsHandlerTest extends TestCase
         $this->handler->getCard()->pushSection($section);
         $this->assertEqualsCanonicalizing(
             json_decode($this->handler->getCard()->toJson(), true),
-            array(
+            [
                 '@type' => 'MessageCard',
                 '@context' => 'https://schema.org/extensions',
                 'title' => 'title',
                 'summary' => 'title',
-                'sections' => array(
-                    array(
+                'sections' => [
+                    [
                         'title' => 'Custom Section Title!',
-                    ),
-                ),
-            )
+                    ],
+                ],
+            ]
         );
     }
 }

@@ -60,14 +60,14 @@ class HttpPost extends AbstractAction
 
     public function setHeaders(array $headers)
     {
-        $this->headers = array();
+        $this->headers = [];
         foreach ($headers as $name => $value) {
             if (!is_string($name) || (!is_string($value) && !is_int($value))) {
                 throw new InvalidArgumentException(
                     'Headers must be key-value pairs, where keys are strings and values are strings or integers'
                 );
             }
-            $this->headers[] = array('name' => $name, 'value' => $value);
+            $this->headers[] = ['name' => $name, 'value' => $value];
         }
         return $this;
     }

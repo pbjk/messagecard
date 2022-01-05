@@ -11,7 +11,7 @@ class OpenUri extends AbstractAction
      *
      * @var array
      */
-    protected static $supportedOsTypes = array('default', 'iOS', 'android', 'windows');
+    protected static $supportedOsTypes = ['default', 'iOS', 'android', 'windows'];
 
     /**
      * Target URIs
@@ -34,7 +34,7 @@ class OpenUri extends AbstractAction
     public function setTargets($targets)
     {
         if (!is_array($targets)) {
-            $targets = array($targets);
+            $targets = [$targets];
         }
         $this->targets = $this->formatTargets($targets);
         return $this;
@@ -42,7 +42,7 @@ class OpenUri extends AbstractAction
 
     protected function formatTargets(array $targets): array
     {
-        $formatted = array();
+        $formatted = [];
         foreach ($targets as $target) {
             // If the target is an array, validate os type and uri
             if (is_array($target)) {
@@ -53,10 +53,10 @@ class OpenUri extends AbstractAction
                 } elseif (!is_string($target['uri'])) {
                     throw new InvalidArgumentException('Target uris must be strings');
                 } else {
-                    $formatted[] = array('os' => $target['os'], 'uri' => $target['uri']);
+                    $formatted[] = ['os' => $target['os'], 'uri' => $target['uri']];
                 }
             } elseif (is_string($target)) {
-                $formatted[] = array('os' => 'default', 'uri' => $target);
+                $formatted[] = ['os' => 'default', 'uri' => $target];
             } else {
                 throw new InvalidArgumentException('Targets must be strings or arrays');
             }

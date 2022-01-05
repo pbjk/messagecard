@@ -83,18 +83,18 @@ class MessageCard extends AbstractMessageCardEntity
      * @param array $placeholders
      * @return void
      */
-    public function send(string $url, array $placeholders = array()): void
+    public function send(string $url, array $placeholders = []): void
     {
         $curl = curl_init($url);
         if ($curl === false) {
             throw new RuntimeException('Unexpected error initializing curl');
         }
 
-        curl_setopt_array($curl, array(
+        curl_setopt_array($curl, [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POSTFIELDS => $this->toJson($placeholders),
-            CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
-        ));
+            CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+        ]);
 
         if (curl_exec($curl) === false) {
             throw new RuntimeException(
@@ -121,7 +121,7 @@ class MessageCard extends AbstractMessageCardEntity
      * @param array $placeholders
      * @return string
      */
-    public function toJson(array $placeholders = array()): string
+    public function toJson(array $placeholders = []): string
     {
         $card_as_string = json_encode($this, JSON_UNESCAPED_SLASHES);
 
