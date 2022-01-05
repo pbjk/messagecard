@@ -9,7 +9,6 @@ use Monolog\Logger;
 
 class TeamsHandler extends AbstractProcessingHandler
 {
-
     protected $url;
     protected $card;
     protected $excludedFields = array();

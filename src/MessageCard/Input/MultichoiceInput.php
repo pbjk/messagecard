@@ -4,7 +4,6 @@ namespace MessageCard\Input;
 
 class MultichoiceInput extends AbstractInput
 {
-
     public $style;
     public $choices;
     public $isMultiSelect;

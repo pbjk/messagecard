@@ -10,7 +10,6 @@ abstract class AbstractMessageCardEntity implements JsonSerializable
     {
         $into_json = array();
         foreach ($this as $property => $value) {
-
             if (is_null($value)) {
                 continue;
             }

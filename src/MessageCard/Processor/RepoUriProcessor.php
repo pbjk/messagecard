@@ -7,7 +7,9 @@ use Monolog\Processor\IntrospectionProcessor;
 
 class RepoUriProcessor extends AbstractPlaceholderProcessor
 {
-    protected $remote, $local, $level;
+    protected $remote;
+    protected $local;
+    protected $level;
     protected $overwrite = false;
     protected $key = 'repo_uri';
 

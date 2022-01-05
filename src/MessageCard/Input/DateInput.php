@@ -4,7 +4,6 @@ namespace MessageCard\Input;
 
 class DateInput extends AbstractInput
 {
-
     public $includeTime;
 
     public function __construct($title, $id = null)

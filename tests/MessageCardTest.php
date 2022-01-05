@@ -1,10 +1,12 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+namespace Tests;
+
 use MessageCard\MessageCard;
 use MessageCard\Section;
+use PHPUnit\Framework\TestCase;
 
-final class MessageCardTest extends Testcase
+class MessageCardTest extends Testcase
 {
     protected $card;
     protected $defaultCard;

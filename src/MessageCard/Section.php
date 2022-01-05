@@ -6,7 +6,6 @@ use MessageCard\Action\AbstractAction;
 
 class Section extends AbstractMessageCardEntity
 {
-
     public $title;
     public $text;
     public $startGroup;

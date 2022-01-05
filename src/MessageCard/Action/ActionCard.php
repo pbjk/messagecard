@@ -7,7 +7,6 @@ use MessageCard\Action\AbstractAction;
 
 class ActionCard extends AbstractAction
 {
-
     public $inputs;
     public $actions;
 

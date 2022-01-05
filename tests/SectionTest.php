@@ -1,10 +1,12 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
-use MessageCard\Section;
-use MessageCard\Action\OpenUri;
+namespace Tests;
 
-final class SectionTest extends TestCase
+use MessageCard\Action\OpenUri;
+use MessageCard\Section;
+use PHPUnit\Framework\TestCase;
+
+class SectionTest extends TestCase
 {
     public function testSetAllPropertiesOfSection()
     {

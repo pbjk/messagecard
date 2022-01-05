@@ -6,7 +6,6 @@ use InvalidArgumentException;
 
 class OpenUri extends AbstractAction
 {
-
     protected static $supportedOsTypes = array('default', 'iOS', 'android', 'windows');
 
     public $targets;
@@ -38,9 +37,9 @@ class OpenUri extends AbstractAction
             if (is_array($target)) {
                 if (!isset($target['os']) || !isset($target['uri'])) {
                     throw new InvalidArgumentException("Targets must include 'os' and 'uri' array keys");
-                } else if (!in_array($target['os'], self::$supportedOsTypes)) {
+                } elseif (!in_array($target['os'], self::$supportedOsTypes)) {
                     throw new InvalidArgumentException('Valid os types are ' . implode(',', self::$supportedOsTypes));
-                } else if (!is_string($target['uri'])) {
+                } elseif (!is_string($target['uri'])) {
                     throw new InvalidArgumentException('Target uris must be strings');
                 } else {
                     $formatted[] = array('os' => $target['os'], 'uri' => $target['uri']);

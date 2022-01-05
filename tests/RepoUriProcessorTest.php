@@ -1,18 +1,22 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+namespace Tests;
+
 use MessageCard\Processor\RepoUriProcessor;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
 
-final class RepoUriProcessorTest extends TestCase
+class RepoUriProcessorTest extends TestCase
 {
-    protected $repo, $handler, $logger;
+    protected $repo;
+    protected $handler;
+    protected $logger;
 
     protected function setUp(): void
     {
         $this->repo = new RepoUriProcessor('https://github.com/user/repo', '/var/www/html', Logger::DEBUG);
-        $this->handler = new TestHandler;
+        $this->handler = new TestHandler();
 
         $this->logger = new Logger('name');
         $this->logger->pushHandler($this->handler);

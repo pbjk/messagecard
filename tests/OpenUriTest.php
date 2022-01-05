@@ -1,9 +1,12 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
-use MessageCard\Action\OpenUri;
+namespace Tests;
 
-final class OpenUriTest extends TestCase
+use InvalidArgumentException;
+use MessageCard\Action\OpenUri;
+use PHPUnit\Framework\TestCase;
+
+class OpenUriTest extends TestCase
 {
     public function testCanCreateTargetsFromArray()
     {

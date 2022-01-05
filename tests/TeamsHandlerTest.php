@@ -1,13 +1,16 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
-use Monolog\Logger;
-use MessageCard\TeamsHandler;
+namespace Tests;
+
+use DateTime;
 use MessageCard\Section;
+use MessageCard\TeamsHandler;
+use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
-final class TeamsHandlerTest extends TestCase
+class TeamsHandlerTest extends TestCase
 {
-
     protected $handler;
     protected $record;
     protected $defaultCard;

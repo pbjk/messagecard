@@ -7,7 +7,6 @@ use RuntimeException;
 
 class MessageCard extends AbstractMessageCardEntity
 {
-
     protected $type = 'MessageCard';
     protected $context = 'https://schema.org/extensions';
     public $title;
@@ -38,7 +37,13 @@ class MessageCard extends AbstractMessageCardEntity
         ));
 
         if (curl_exec($curl) === false) {
-            throw new RuntimeException("Error sending MessageCard to incoming webhook (code: " . curl_errno($curl) . "; message: '" . curl_error($curl) . "')");
+            throw new RuntimeException(
+                "Error sending MessageCard to incoming webhook (code: "
+                    . curl_errno($curl)
+                    . "; message: '"
+                    . curl_error($curl)
+                    . "')"
+            );
         }
 
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -66,7 +71,7 @@ class MessageCard extends AbstractMessageCardEntity
     public function monospace()
     {
         if (!empty($this->sections)) {
-            foreach($this->sections as $section) {
+            foreach ($this->sections as $section) {
                 $section->formatMonospace();
             }
         }

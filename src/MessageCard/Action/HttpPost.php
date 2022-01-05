@@ -6,7 +6,6 @@ use InvalidArgumentException;
 
 class HttpPost extends AbstractAction
 {
-
     public $target;
     public $body;
     public $headers;
